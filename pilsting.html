@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZWV Fahrplan Werk Landshut - VZ-3 Pilsting</title>
+  <style>
+    body {
+      background-color: #121212; /* Dunkleres Schwarz für Augenschonung */
+      color: #E0E0E0; /* Helles Grau für besseren Kontrast */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3.5rem; /* Größer für bessere Lesbarkeit */
+      margin-bottom: 10px;
+      font-weight: bold; /* Schrift fett */
+    }
+
+    p {
+      font-size: 2rem; /* Größer für bessere Lesbarkeit */
+      font-weight: bold; /* Schrift fett */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #E0E0E0; /* Leichtes Grau für bessere Sichtbarkeit */
+      padding: 15px; /* Mehr Abstand für bessere Lesbarkeit */
+      text-align: left;
+      font-size: 1.8rem; /* Größer für bessere Lesbarkeit */
+      font-weight: bold; /* Schrift fett */
+    }
+
+    th {
+      background-color: #333; /* Dunkelgrauer Hintergrund für die Header */
+    }
+
+    td {
+      background-color: #1E1E1E; /* Etwas hellerer Hintergrund für Zeilen */
+    }
+
+    .green-row {
+      background-color: #4CAF50; /* Angepasste Farbe für bessere Sichtbarkeit */
+      color: white;
+    }
+
+    .red-row {
+      background-color: #F44336;
+      color: white;
+    }
+
+    .orange {
+      background-color: #FF9800;
+      color: black;
+    }
+
+    .blink {
+      background-color: #4CAF50;
+      color: white;
+      animation: blink-animation 1.5s steps(5, start) infinite;
+    }
+
+    @keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 80px; /* Größe angepasst */
+      height: auto;
+    }
+
+    /* Medienabfrage für mobile Geräte */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem; /* Verkleinert für mobile Geräte */
+      }
+
+      p {
+        font-size: 1.8rem;
+      }
+
+      th, td {
+        padding: 10px; /* Weniger Abstand für mobile Geräte */
+        font-size: 1.5rem; /* Verkleinert für mobile Geräte */
+      }
+
+      .logo {
+        width: 50px; /* Kleinere Logo-Größe für mobile */
+      }
+    }
+  </style>
+
+  <!-- Seite nach 5 Minuten neu laden -->
+  <script>
+    setTimeout(function(){
+      window.location.reload(1);
+    }, 300000); // 5 Minuten = 300000 ms
+  </script>
+
+</head>
+<body>
+
+<div class="header">
+  <h1>ZWV Fahrplan Werk Landshut - VZ-3 Pilsting</h1>
+  <p>Aktuelle Uhrzeit: <span id="clock"></span></p>
+  <img src="https://cdn.bimmertoday.de/wp-content/uploads/2024/04/BMW-Logo-2024-Transparenz-dunkler-Kranz.jpg" alt="Logo" class="logo">
+</div>
+
+<table id="flight-table">
+  <thead>
+    <tr>
+      <th>Zeit</th>
+      <th>Ziel</th>
+      <th>ZWV</th>
+      <th>Status</th>
+      <th>Aktionen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Die Zeilen werden hier per JavaScript hinzugefügt -->
+  </tbody>
+</table>
+
+<script>
+  const flights = [
+    { time: "00:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV430" },
+    { time: "05:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV430" },
+    { time: "12:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV430" },
+    { time: "17:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV430" },
+    { time: "02:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV432" },
+    { time: "07:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV432" },
+    { time: "14:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV432" },
+    { time: "19:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV432" },
+    { time: "03:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV433" },
+    { time: "08:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV433" },
+    { time: "15:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV433" },
+    { time: "20:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV433" },
+    { time: "04:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV434" },
+    { time: "09:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV434" },
+    { time: "16:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV434" },
+    { time: "21:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV434" },
+    { time: "05:30", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV435" },
+    { time: "11:00", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV435" },
+    { time: "17:30", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV435" },
+    { time: "23:00", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV435" },
+    { time: "01:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV436" },
+    { time: "07:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV436" },
+    { time: "12:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV436" },
+    { time: "18:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV436" },
+    { time: "04:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV437" },
+    { time: "09:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV437" },
+    { time: "15:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV437" },
+    { time: "20:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV437" },
+    { time: "06:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV438" },
+    { time: "11:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV438" },
+    { time: "17:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV438" },
+    { time: "22:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV438" },
+    { time: "04:00", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV439" },
+    { time: "09:30", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV439" },
+    { time: "15:00", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV439" },
+    { time: "20:30", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV439" },
+    { time: "00:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV440" },
+    { time: "06:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV440" },
+    { time: "12:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV440" },
+    { time: "19:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV440" },
+    { time: "02:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV442" },
+    { time: "07:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV442" },
+    { time: "14:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV442" },
+    { time: "19:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV442" },
+    { time: "01:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV444" },
+    { time: "06:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV444" },
+    { time: "12:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV444" },
+    { time: "17:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV444" },
+    { time: "02:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV447" },
+    { time: "07:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV447" },
+    { time: "14:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV447" },
+    { time: "19:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV447" },
+    { time: "02:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV448" },
+    { time: "07:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV448" },
+    { time: "14:15", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV448" },
+    { time: "19:45", destination: "Anmeldung Wareneingang Werk 4.1", flight: "ZWV448" }
+  ];
+
+  let rowStatus = Array(flights.length).fill("");
+  let rowMarkedForOrange = Array(flights.length).fill(false);
+  let orangeTimestamps = Array(flights.length).fill(null);
+
+  function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+  }
+
+  function markAsDone(index, color) {
+    rowStatus[index] = color;
+    updateFlights();
+  }
+
+  function resetStatus(index) {
+    rowStatus[index] = "";
+    rowMarkedForOrange[index] = false;
+    orangeTimestamps[index] = null;
+    updateFlights();
+  }
+
+  function updateFlights() {
+    const now = new Date();
+    const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    const tableBody = document.querySelector('#flight-table tbody');
+    tableBody.innerHTML = '';
+
+    flights.forEach((flight, index) => {
+      const row = document.createElement('tr');
+      const flightTime = flight.time;
+      const [flightHours, flightMinutes] = flight.time.split(':');
+      const flightDateTime = new Date();
+      flightDateTime.setHours(flightHours);
+      flightDateTime.setMinutes(flightMinutes);
+      const timeDifferenceInMinutes = Math.floor((now - flightDateTime) / 60000);
+
+      if (orangeTimestamps[index]) {
+        const elapsedTimeSinceOrange = (now - orangeTimestamps[index]) / (1000 * 60 * 60);
+        if (elapsedTimeSinceOrange >= 24) {
+          rowMarkedForOrange[index] = false;
+          orangeTimestamps[index] = null;
+        }
+      }
+
+      let rowClass = '';
+      if (rowStatus[index] === "green") {
+        rowClass = 'green-row';
+      } else if (rowStatus[index] === "red") {
+        rowClass = 'red-row';
+      } else if (rowMarkedForOrange[index]) {
+        rowClass = 'orange';
+      } else if (timeDifferenceInMinutes > 5) {
+        rowMarkedForOrange[index] = true;
+        orangeTimestamps[index] = new Date();
+        rowClass = 'orange';
+      } else if (flightTime === currentTime) {
+        rowClass = 'blink';
+      }
+
+      row.innerHTML = `
+        <td class="${rowClass}">${flight.time}</td>
+        <td class="${rowClass}">${flight.destination}</td>
+        <td class="${rowClass}">${flight.flight}</td>
+        <td class="${rowClass}">${rowStatus[index]}</td>
+        <td class="${rowClass}">
+          <button onclick="markAsDone(${index}, 'green')">Erledigt</button>
+          <button onclick="markAsDone(${index}, 'red')">nicht erledigt</button>
+          <button onclick="resetStatus(${index})">Zurücksetzen</button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  updateFlights();
+  setInterval(() => {
+    updateClock();
+    updateFlights();
+  }, 1000);
+</script>
+
+</body>
+</html>
