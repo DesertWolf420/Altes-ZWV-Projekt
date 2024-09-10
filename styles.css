@@ -1,0 +1,106 @@
+body {
+  background-color: #121212; /* Dunkleres Schwarz für Augenschonung */
+  color: #E0E0E0; /* Helles Grau für besseren Kontrast */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Verhindert Scrollen der gesamten Seite */
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h1 {
+  font-size: 3.5rem; /* Größer für bessere Lesbarkeit */
+  margin-bottom: 10px;
+  font-weight: bold; /* Schrift fett */
+}
+
+p {
+  font-size: 2rem; /* Größer für bessere Lesbarkeit */
+  font-weight: bold; /* Schrift fett */
+}
+
+.table-container {
+  max-height: 80vh; /* Maximale Höhe des Containers */
+  overflow-y: auto; /* Scrollbalken nur für die Tabelle */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #E0E0E0; /* Leichtes Grau für bessere Sichtbarkeit */
+  padding: 15px; /* Mehr Abstand für bessere Lesbarkeit */
+  text-align: left;
+  font-size: 1.8rem; /* Größer für bessere Lesbarkeit */
+  font-weight: bold; /* Schrift fett */
+}
+
+th {
+  background-color: #333; /* Dunkelgrauer Hintergrund für die Header */
+}
+
+td {
+  background-color: #1E1E1E; /* Etwas hellerer Hintergrund für Zeilen */
+}
+
+.green-row {
+  background-color: #4CAF50; /* Angepasste Farbe für bessere Sichtbarkeit */
+  color: white;
+}
+
+.red-row {
+  background-color: #F44336;
+  color: white;
+}
+
+.orange {
+  background-color: #FF9800;
+  color: black;
+}
+
+.blink {
+  background-color: #4CAF50;
+  color: white;
+  animation: blink-animation 1.5s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 80px; /* Größe angepasst */
+  height: auto;
+}
+
+/* Medienabfrage für mobile Geräte */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem; /* Verkleinert für mobile Geräte */
+  }
+
+  p {
+    font-size: 1.8rem;
+  }
+
+  th, td {
+    padding: 10px; /* Weniger Abstand für mobile Geräte */
+    font-size: 1.5rem; /* Verkleinert für mobile Geräte */
+  }
+
+  .logo {
+    width: 50px; /* Kleinere Logo-Größe für mobile */
+  }
+}
