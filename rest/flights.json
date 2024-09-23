@@ -86,5 +86,23 @@
     { "board": "Pilsting", "time": "07:45", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV448" },
     { "board": "Pilsting", "time": "14:15", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV448" },
     { "board": "Pilsting", "time": "19:45", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV448" },
-    { "board": "Pilsting", "time": "23:59", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV460" }
+    	    { "board": "Pilsting", "time": "5:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV460" },
+	    { "board": "Pilsting", "time": "7:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV461" },
+	    { "board": "Pilsting", "time": "9:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV462" },
+	    { "board": "Pilsting", "time": "11:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV460" },
+	    { "board": "Pilsting", "time": "13:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV461" },
+	    { "board": "Pilsting", "time": "15:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV462" },
+	    { "board": "Pilsting", "time": "17:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV460" },
+	    { "board": "Pilsting", "time": "19:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV461" },
+	    { "board": "Pilsting", "time": "21:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV462" },
+	    { "board": "Pilsting", "time": "5:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV470" },
+	    { "board": "Pilsting", "time": "7:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV471" },
+	    { "board": "Pilsting", "time": "9:30", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV472" },
+	    { "board": "Pilsting", "time": "11:15", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV470" },
+	    { "board": "Pilsting", "time": "13:15", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV471" },
+	    { "board": "Pilsting", "time": "15:15", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV472" },
+	    { "board": "Pilsting", "time": "17:00", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV470" },
+	    { "board": "Pilsting", "time": "19:00", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV471" },
+	    { "board": "Pilsting", "time": "21:00", "destination": "Anmeldung Wareneingang Werk 4.1", "flight": "ZWV472" }
+
 ]
