@@ -24,16 +24,24 @@ function updateFlights() {
   const now = new Date();
   const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
   const tableBody = document.querySelector('#flight-table tbody');
-  tableBody.innerHTML = '';
 
-  $.getJSON('https://zwv.samaxi.de/rest/flights.json', function(data) {
+  var urlParams = new URLSearchParams(window.location.search);
+  var loc = urlParams.get('location');
+
+  if (loc == null) {
+    loc = 'landshut'
+  }
+
+  var flights_url = 'https://zwv.samaxi.de/rest/flights/' + loc + '.json';
+
+  $.getJSON(flights_url, function(data) {
     flights = data;
-    console.log(flights);
 
     var rowStatus = Array(flights.length).fill("");
     var rowMarkedForOrange = Array(flights.length).fill(false);
     var orangeTimestamps = Array(flights.length).fill(null);
 
+    tableBody.innerHTML = '';
     flights.forEach((flight, index) => {
       const row = document.createElement('tr');
       const flightTime = flight.time;
