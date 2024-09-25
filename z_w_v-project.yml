@@ -1,3 +1,6 @@
 ---
 secrets:
   - 04e65fe2b244b1ed8d706f173bcae1e1c1a5ae63
+dbic:
+  schema:
+      ZWV::Project::Schema: dbi:SQLite:./data/zwv.db

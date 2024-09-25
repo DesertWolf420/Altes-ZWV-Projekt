@@ -8,16 +8,17 @@ function updateClock() {
   document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
 }
 
-function markAsDone(index, color) {
-  rowStatus[index] = color;
-  updateFlights();
-}
-
-function resetStatus(index) {
-  rowStatus[index] = "";
-  rowMarkedForOrange[index] = false;
-  orangeTimestamps[index] = null;
-  updateFlights();
+function setState(id, new_state) {
+  var ds = {"state": new_state};
+  $.ajax({
+    url:         '/rest/history/' + id,
+    method:      'PUT',
+    data:        JSON.stringify(ds),
+    dataType:    'json'
+  }).done(function(msg) {
+    console.log(msg);
+    updateFlights();
+  });
 }
 
 function updateFlights() {
@@ -32,10 +33,11 @@ function updateFlights() {
     board = 'Landshut'
   }
 
-  var flights_url = 'https://zwv.samaxi.de/rest/flights.json';
+  var url    = 'rest/history/list';
+  var filter   = { "filters" : {"time":"today","board":board}};
 
-  $.getJSON(flights_url, function(data) {
-    flights = data;
+  $.post(url, JSON.stringify(filter), function(data) {
+    flights = data['flights'];
 
     var rowStatus = Array(flights.length).fill("");
     var rowMarkedForOrange = Array(flights.length).fill(false);
@@ -45,12 +47,8 @@ function updateFlights() {
     flights.forEach((flight, index) => {
       if (flight.board == board ) {
 	const row = document.createElement('tr');
-	const flightTime = flight.time;
-	const [flightHours, flightMinutes] = flight.time.split(':');
-	const flightDateTime = new Date();
-	flightDateTime.setHours(flightHours);
-	flightDateTime.setMinutes(flightMinutes);
-	const timeDifferenceInMinutes = Math.floor((now - flightDateTime) / 60000);
+	var fDT = new Date(flight.time*1000);
+	var timeDifferenceInMinutes = Math.floor((now - fDT) / 60000);
 
 	if (orangeTimestamps[index]) {
 	  const elapsedTimeSinceOrange = (now - orangeTimestamps[index]) / (1000 * 60 * 60);
@@ -60,30 +58,27 @@ function updateFlights() {
 	  }
 	}
 
-	let rowClass = '';
-	if (rowStatus[index] === "green") {
-	  rowClass = 'green-row';
-	} else if (rowStatus[index] === "red") {
-	  rowClass = 'red-row';
-	} else if (rowMarkedForOrange[index]) {
+	var TS = `${String(fDT.getHours()).padStart(2, '0')}:${String(fDT.getMinutes()).padStart(2, '0')}`;
+
+	var state2class = new Array('black', 'red-row', 'green-row');
+	let rowClass = state2class[flight.state];
+	if (flight.state < 1 && timeDifferenceInMinutes > 5) {
 	  rowClass = 'orange';
-	} else if (timeDifferenceInMinutes > 5) {
-	  rowMarkedForOrange[index] = true;
-	  orangeTimestamps[index] = new Date();
-	  rowClass = 'orange';
-	} else if (flightTime === currentTime) {
+	};
+
+	if (TS === currentTime) {
 	  rowClass = 'blink';
 	}
-
+ 
 	row.innerHTML = `
-	  <td class="${rowClass}">${flight.time}</td>
+	  <td class="${rowClass}">${TS}</td>
 	  <td class="${rowClass}">${flight.destination}</td>
 	  <td class="${rowClass}">${flight.flight}</td>
 	  <td class="${rowClass}">${rowStatus[index]}</td>
 	  <td class="${rowClass}">
-	    <button onclick="markAsDone(${index}, 'green')">Erledigt</button>
-	    <button onclick="markAsDone(${index}, 'red')">nicht erledigt</button>
-	    <button onclick="resetStatus(${index})">Zurücksetzen</button>
+	    <button onclick="setState(${flight.id}, 2)">Erledigt</button>
+	    <button onclick="setState(${flight.id}, 1)">nicht erledigt</button>
+	    <button onclick="setState(${flight.id}, 0)">Zurücksetzen</button>
 	  </td>
 	`;
 	tableBody.appendChild(row);
@@ -96,4 +91,4 @@ updateFlights();
 setInterval(() => {
   updateClock();
   updateFlights();
-}, 1000);
+}, 10000);
