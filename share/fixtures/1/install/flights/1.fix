@@ -1,0 +1,10 @@
+$HASH1 = {
+           area  => '',
+           board => 'Landshut',
+           destination
+                 => 'Anmeldung Wareneingang Werk 4.1',
+           flight
+                 => 'ZWV400 (MO/MI/FR) Werk 2.1/Werk 2.2',
+           id    => 1,
+           time  => '07:15'
+         };
