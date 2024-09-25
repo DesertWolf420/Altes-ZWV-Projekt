@@ -69,7 +69,7 @@ function updateFlights() {
 	if (TS === currentTime) {
 	  rowClass = 'blink';
 	}
- 
+
 	row.innerHTML = `
 	  <td class="${rowClass}">${TS}</td>
 	  <td class="${rowClass}">${flight.destination}</td>
